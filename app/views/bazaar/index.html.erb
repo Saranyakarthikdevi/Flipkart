@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Your Pragmatic Catalog</h1>
+
+<% cache @items do %>
+  <% @items.each do |item| %>
+    <% cache item do %>
+      <div class="entry">
+        <%= image_tag(item.image_url) %>
+        <h3><%= item.title %></h3>
+        <%= sanitize(item.description) %>
+        <div class="price_line">
+          <span class="price"><%= number_to_currency(item.price) %></span>
+          <%= button_to 'Add to Carts', line_items_path(item_id: item) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
